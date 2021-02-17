@@ -7,6 +7,7 @@ import {
   from,
 } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
+import GetUsers from "./Components/GetUsers";
 
 const errorLink = onError(({ graphqlErrors, networkError }) => {
   if (graphqlErrors) {
@@ -24,13 +25,17 @@ const link = from([
 const client = new ApolloClient({
   cache: new InMemoryCache(),
   // link to backend server
-  link: link,
+  // link: link,
+  uri: "http://localhost:6969/graphql",
 });
 
 function App() {
-  return <ApolloProvider client={client}>
-    
-  </ApolloProvider>;
+  return (
+    <ApolloProvider client={client}>
+      {" "}
+      <GetUsers />
+    </ApolloProvider>
+  );
 }
 
 export default App;
