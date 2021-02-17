@@ -10,7 +10,8 @@ function GetUsers() {
   useEffect(() => {
     if (data) {
       console.log(data);
-      setUsers(data.getAllUsers.slice(0, 4));
+      const usersArray = data.getAllUsers;
+      setUsers(usersArray.slice(usersArray.length - 5));
     }
   }, [data]);
 
@@ -19,11 +20,15 @@ function GetUsers() {
 
   return (
     <div>
+      <h1>Last 5 Users</h1>
       {users.map((user, index) => {
         return (
-          <h1 key={index}>
-            {user.firstName} {user.lastName}
-          </h1>
+          <div key={index} style={{marginBottom: "3rem"}}>
+            <p>
+              {user.firstName} {user.lastName}
+            </p>
+            <p>{user.email}</p>
+          </div>
         );
       })}
     </div>
